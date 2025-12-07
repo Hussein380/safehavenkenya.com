@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Safe Haven Brand Colors - HSL */
+    --background: 50 14% 96%; /* Warm Soft Grey #F5F5F2 */
+    --foreground: 0 0% 12%; /* Midnight Charcoal #1E1E1E */
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    --primary: 180 43% 24%; /* Deep Teal #0A6E6E */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 140 18% 93%; /* Pale Sage Green #E9F1EB */
+    --secondary-foreground: 0 0% 12%;
+
+    --accent: 28 52% 64%; /* Muted Sand Gold #D4A373 */
+    --accent-foreground: 0 0% 12%;
+
+    --muted: 50 14% 92%;
+    --muted-foreground: 0 0% 40%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 180 20% 85%;
+    --input: 180 20% 85%;
+    --ring: 180 43% 24%;
+
+    --radius: 0.75rem;
+
+    /* Custom brand tokens */
+    --teal: 180 43% 24%;
+    --teal-light: 180 30% 35%;
+    --teal-dark: 180 50% 18%;
+    --gold: 28 52% 64%;
+    --gold-light: 28 52% 74%;
+    --sage: 140 18% 93%;
+    --charcoal: 0 0% 12%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(180 43% 24% / 0.95) 0%, hsl(180 50% 18% / 0.9) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(140 18% 97%) 100%);
+    --gradient-accent: linear-gradient(135deg, hsl(28 52% 64%) 0%, hsl(28 52% 54%) 100%);
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(180 43% 24% / 0.08);
+    --shadow-elevated: 0 12px 40px -8px hsl(180 43% 24% / 0.15);
+    --shadow-glow: 0 0 40px hsl(180 43% 24% / 0.2);
+    --shadow-gold: 0 4px 20px -4px hsl(28 52% 64% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 0 0% 8%;
+    --foreground: 50 14% 96%;
+    --card: 0 0% 12%;
+    --card-foreground: 50 14% 96%;
+    --popover: 0 0% 12%;
+    --popover-foreground: 50 14% 96%;
+    --primary: 180 43% 35%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 180 20% 15%;
+    --secondary-foreground: 50 14% 96%;
+    --accent: 28 52% 64%;
+    --accent-foreground: 0 0% 12%;
+    --muted: 0 0% 18%;
+    --muted-foreground: 0 0% 65%;
+    --border: 0 0% 20%;
+    --input: 0 0% 20%;
+    --ring: 180 43% 35%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24 lg:py-32;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-teal-light;
+  }
+
+  .card-elevated {
+    @apply bg-card rounded-2xl p-6 md:p-8 shadow-soft hover:shadow-elevated transition-all duration-400;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-xl font-medium 
+           hover:bg-teal-light transition-all duration-300 
+           shadow-soft hover:shadow-elevated hover:-translate-y-0.5;
+  }
+
+  .btn-accent {
+    @apply bg-accent text-accent-foreground px-6 py-3 rounded-xl font-medium 
+           hover:bg-gold-light transition-all duration-300 
+           shadow-soft hover:shadow-gold hover:-translate-y-0.5;
+  }
+
+  .btn-outline {
+    @apply border-2 border-primary text-primary px-6 py-3 rounded-xl font-medium 
+           hover:bg-primary hover:text-primary-foreground transition-all duration-300;
+  }
+
+  .link-underline {
+    @apply relative inline-block after:content-[''] after:absolute after:w-full 
+           after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 
+           after:bg-accent after:origin-bottom-right after:transition-transform 
+           after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  }
+}
+
+@layer utilities {
+  .duration-400 {
+    transition-duration: 400ms;
+  }
+
+  .animation-delay-200 {
+    animation-delay: 200ms;
+  }
+
+  .animation-delay-400 {
+    animation-delay: 400ms;
+  }
+
+  .animation-delay-600 {
+    animation-delay: 600ms;
+  }
+}
