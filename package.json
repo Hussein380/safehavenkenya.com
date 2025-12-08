@@ -1,0 +1,11 @@
+{
+    "name": "safehaven-monorepo",
+    "private": true,
+    "workspaces": [
+        "apps/*"
+    ],
+    "scripts": {
+        "dev": "npm run dev --workspace=safehaven-frontend",
+        "build": "npm run build --workspaces"
+    }
+}
