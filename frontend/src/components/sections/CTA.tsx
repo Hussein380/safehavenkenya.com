@@ -25,7 +25,7 @@ export const CTA = () => {
             <span className="text-primary">Transformation</span>?
           </h2>
           <p className="text-muted-foreground text-lg leading-relaxed mb-10 max-w-2xl mx-auto">
-            Take the first step towards a more empowered, mentally healthy, and fulfilling life. 
+            Take the first step towards a more empowered, mentally healthy, and fulfilling life.
             Our team is here to guide you every step of the way.
           </p>
 
@@ -37,7 +37,7 @@ export const CTA = () => {
               </Link>
             </Button>
             <Button asChild variant="whatsapp" size="xl">
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/254721414295" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2" size={20} />
                 WhatsApp Us
               </a>

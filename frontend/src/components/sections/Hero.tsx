@@ -63,7 +63,7 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.5 }}
             className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed"
           >
-            Empowering individuals and communities through leadership development, 
+            Empowering individuals and communities through leadership development,
             mental health awareness, and personal growth programs. Begin your transformation today.
           </motion.p>
 
@@ -80,7 +80,7 @@ export const Hero = () => {
               </Link>
             </Button>
             <Button asChild variant="whatsapp" size="xl">
-              <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
+              <a href="https://wa.me/254721414295" target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2" size={20} />
                 Chat on WhatsApp
               </a>

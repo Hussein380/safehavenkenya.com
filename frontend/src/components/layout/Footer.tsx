@@ -116,19 +116,19 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail size={18} className="text-accent mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:info@safehavenconsultancy.com"
+                  href="mailto:consultancysafehaven@gmail.com"
                   className="text-primary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
                 >
-                  info@safehavenconsultancy.com
+                  consultancysafehaven@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={18} className="text-accent mt-0.5 flex-shrink-0" />
                 <a
-                  href="tel:+1234567890"
+                  href="tel:0729875368"
                   className="text-primary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
                 >
-                  +1 (234) 567-890
+                  0729 875 368
                 </a>
               </li>
               <li className="flex items-start gap-3">

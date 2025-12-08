@@ -11,23 +11,23 @@ const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: "info@safehavenconsultancy.com",
+    details: "consultancysafehaven@gmail.com",
     description: "We'll respond within 24 hours",
-    href: "mailto:info@safehavenconsultancy.com",
+    href: "mailto:consultancysafehaven@gmail.com",
   },
   {
     icon: Phone,
     title: "Call Us",
-    details: "+1 (234) 567-890",
+    details: "0729 875 368",
     description: "Mon-Fri, 9am-5pm",
-    href: "tel:+1234567890",
+    href: "tel:0729875368",
   },
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    details: "+1 (234) 567-890",
+    details: "0721 414295",
     description: "Quick responses guaranteed",
-    href: "https://wa.me/1234567890",
+    href: "https://wa.me/254721414295",
   },
   {
     icon: MapPin,
@@ -217,7 +217,7 @@ const Contact = () => {
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
-                        placeholder="+1 (234) 567-890"
+                        placeholder="0729 875 368"
                         className="h-12"
                       />
                     </div>
@@ -267,7 +267,7 @@ const Contact = () => {
                   <p className="text-center text-muted-foreground text-sm">
                     Or reach us instantly via{" "}
                     <a
-                      href="https://wa.me/1234567890"
+                      href="https://wa.me/254721414295"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary font-medium hover:underline"
