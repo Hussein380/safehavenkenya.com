@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://safehavenconsultancy.com/sitemap.xml
+Sitemap: https://safehavenkenya.com/sitemap.xml
