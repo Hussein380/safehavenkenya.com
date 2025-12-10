@@ -19,10 +19,9 @@ const footerLinks = {
 };
 
 const socialLinks = [
-  { icon: Facebook, href: "#", label: "Facebook" },
-  { icon: Instagram, href: "#", label: "Instagram" },
-  { icon: Linkedin, href: "#", label: "LinkedIn" },
-  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Facebook, href: "https://www.facebook.com/share/1FonfmhVYX/", label: "Facebook" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/safehaven-kenya-71b7163a0/", label: "LinkedIn" },
+  { icon: Twitter, href: "https://x.com/safehaven_kenya", label: "Twitter" },
 ];
 
 export const Footer = () => {
