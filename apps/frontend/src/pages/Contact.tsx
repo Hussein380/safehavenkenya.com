@@ -32,7 +32,7 @@ const contactInfo = [
   {
     icon: MapPin,
     title: "Visit Us",
-    details: "Your City, Country",
+    details: "Nairobi, Kenya",
     description: "By appointment only",
     href: "#",
   },
@@ -87,7 +87,7 @@ const Contact = () => {
               Let's Start a Conversation
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl leading-relaxed">
-              Whether you have questions, need guidance, or are ready to begin your 
+              Whether you have questions, need guidance, or are ready to begin your
               transformation journey—we're here to help.
             </p>
           </motion.div>
@@ -111,7 +111,7 @@ const Contact = () => {
                   Reach Out to Us
                 </h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  We're committed to providing a safe, supportive experience from your 
+                  We're committed to providing a safe, supportive experience from your
                   very first interaction. Choose how you'd like to connect.
                 </p>
               </div>
