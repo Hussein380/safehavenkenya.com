@@ -195,49 +195,57 @@ export const MentalHealthModal = ({
         }
     };
 
-    const submitTest = async () => {
+    const analyzeScore = (score: number, maxScore: number, testId: string, testName: string) => {
+        const ratio = score / maxScore;
+        let label = "Assessment Complete";
+        let message = "";
+
+        // WHO-5: Higher score is better
+        if (testId === 'who5') {
+            if (ratio > 0.5) {
+                label = "Well-being is Good";
+                message = "Your responses suggest that your overall well-being is in a good range. You're experiencing positive emotions and life satisfaction. Continue to maintain healthy habits, stay connected with loved ones, and engage in activities that bring you joy. Remember, mental wellness is an ongoing journey, and it's great that you're taking time to check in with yourself.";
+            } else if (ratio > 0.28) {
+                label = "Reduced Well-being";
+                message = "Your responses indicate that your well-being may be lower than ideal. This is a sign that it might be helpful to focus on self-care and consider reaching out for support. Try to engage in activities you enjoy, maintain regular sleep patterns, and connect with friends or family. If these feelings persist, consider speaking with a mental health professional.";
+            } else {
+                label = "Low Well-being";
+                message = "Your responses suggest that your well-being is significantly impacted. It's important to know that you don't have to face this alone. Please reach out to our mental health expert for confidential support on WhatsApp: 0729 875 368. Professional support can make a significant difference, and there are effective strategies and treatments available to help improve your well-being.";
+            }
+        } else {
+            // PHQ-9, GAD-7, K10, DASS-21: Lower score is better
+            if (ratio < 0.25) {
+                label = "Likely Minimal Symptoms";
+                message = "Your responses suggest minimal symptoms at this time. This is positive news! Continue to maintain healthy lifestyle habits, stay connected with your support network, and practice regular self-care. Remember that mental health is an ongoing journey, and it's always okay to reach out for support if you notice changes in how you're feeling.";
+            } else if (ratio < 0.50) {
+                label = "Possible Mild Symptoms";
+                message = "Your responses indicate the possibility of mild symptoms. While this may not be cause for immediate concern, it's a good time to focus on self-care strategies. Consider maintaining regular routines, getting adequate sleep, staying physically active, and connecting with supportive people in your life. If symptoms persist or worsen, don't hesitate to seek professional guidance.";
+            } else if (ratio < 0.75) {
+                label = "Possible Moderate Symptoms";
+                message = "Your responses suggest the possibility of moderate symptoms that may be impacting your daily life. It's important to take these signs seriously and consider seeking support. Please reach out to our mental health expert for confidential support on WhatsApp: 0729 875 368. Professional support can help you develop coping strategies and explore treatment options that may be beneficial for you.";
+            } else {
+                label = "Possible Severe Symptoms";
+                message = "Your responses indicate the possibility of more significant symptoms that are likely impacting your daily functioning. It's important to know that help is available and effective treatments exist. Please reach out to our mental health expert for confidential support on WhatsApp: 0729 875 368. Seeking professional support is a sign of strength, and early intervention can make a significant positive difference in your mental health journey.";
+            }
+        }
+
+        return { score, label, message };
+    };
+
+    const submitTest = () => {
         if (!currentTest) return;
         setLoading(true);
         setStep(currentTest.questions.length + 1); // Loading state index
 
         const totalScore = answers.reduce((a, b) => a + b, 0);
 
-        try {
-            // Use relative path - same domain for frontend and backend on Vercel
-            const response = await fetch('/api/mental-health/analyze', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    score: totalScore,
-                    testName: currentTest.name,
-                    maxScore: currentTest.maxScore,
-                    testId: currentTest.id
-                }),
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || "Failed to analyze");
-            }
-
-            setResult(data);
+        // Simulate brief loading for better UX
+        setTimeout(() => {
+            const result = analyzeScore(totalScore, currentTest.maxScore, currentTest.id, currentTest.name);
+            setResult(result);
             setStep(currentTest.questions.length + 2); // Result state index
-        } catch (error) {
-            console.error("Analysis failed:", error);
-            // Fallback
-            setResult({
-                score: totalScore,
-                label: "Assessment Complete",
-                message: "We couldn't reach our AI specialist right now. " +
-                    (totalScore / currentTest.maxScore > 0.5 ?
-                        " Please reach out to our mental health expert for confidential support on WhatsApp: 0729 875 368" :
-                        "Remember to take care of yourself."),
-            });
-            setStep(currentTest.questions.length + 2);
-        } finally {
             setLoading(false);
-        }
+        }, 800);
     };
 
     const getScoreColor = (score: number, max: number, testId: string) => {
