@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, Brain } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import heroBg from "@/assets/hero-bg.jpg";
+import { useState } from "react";
+import { MentalHealthModal } from "@/components/mental-health/MentalHealthModal";
 
 export const Hero = () => {
+  const [isTestOpen, setIsTestOpen] = useState(false);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <MentalHealthModal open={isTestOpen} onOpenChange={setIsTestOpen} />
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -84,6 +89,15 @@ export const Hero = () => {
                 <MessageCircle className="mr-2" size={20} />
                 Chat on WhatsApp
               </a>
+            </Button>
+            <Button
+              variant="outline"
+              size="xl"
+              className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/20"
+              onClick={() => setIsTestOpen(true)}
+            >
+              <Brain className="mr-2" size={20} />
+              Test Your Mental State
             </Button>
           </motion.div>
         </motion.div>

@@ -4,21 +4,21 @@ import { Quote } from "lucide-react";
 const testimonials = [
   {
     quote: "Safe Haven Consultancy transformed the way our team approaches leadership. The workshops were insightful, practical, and deeply impactful.",
-    author: "Sarah M.",
+    author: "Abdiwahab M.",
     role: "HR Director",
-    company: "Growth Corp",
+    company: "Tawheed Globals",
   },
   {
     quote: "The mental health awareness program opened my eyes to self-care practices I never knew I needed. I feel more equipped to handle life's challenges.",
     author: "James K.",
     role: "Entrepreneur",
-    company: "StartUp Hub",
+    company: "Nadjam Travel",
   },
   {
     quote: "A truly safe space where I could explore my potential without judgment. The personal empowerment sessions changed my career trajectory.",
     author: "Amara T.",
-    role: "Marketing Manager",
-    company: "Creative Solutions",
+    role: "student",
+    company: "Garissa University",
   },
 ];
 
