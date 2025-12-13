@@ -6,7 +6,8 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "installCommand": "cd ../.. && npm install"
+        "installCommand": "cd ../.. && npm install",
+        "buildCommand": "cd ../.. && npm run build --workspace=safehaven-frontend"
       }
     }
   ],

@@ -7,7 +7,7 @@
     "scripts": {
         "dev": "npm run dev --workspace=safehaven-frontend",
         "build": "npm run build --workspaces",
-        "vercel-build": "npm run build --workspace=safehaven-backend && npm run build --workspace=safehaven-frontend"
+        "vercel-build": "npm run build --workspace=safehaven-frontend"
     },
     "engines": {
         "node": "20.x"

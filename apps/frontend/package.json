@@ -9,7 +9,7 @@
     "build:dev": "vite build --mode development",
     "lint": "eslint .",
     "preview": "vite preview",
-    "vercel-build": "cd ../.. && npm install && cd apps/frontend && npm run build"
+    "vercel-build": "cd ../.. && npm install && npm run build --workspace=safehaven-frontend"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
