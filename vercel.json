@@ -1,7 +1,35 @@
 {
-  "buildCommand": "npm run build --workspace=safehaven-frontend",
-  "outputDirectory": "apps/frontend/dist",
-  "installCommand": "npm install",
-  "framework": "vite"
+  "version": 2,
+  "builds": [
+    {
+      "src": "apps/backend/server.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": "apps/backend/dist/**"
+      }
+    },
+    {
+      "src": "apps/frontend/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist",
+        "buildCommand": "npm run build"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/apps/backend/server.js"
+    },
+    {
+      "src": "/(.*\\..*)",
+      "dest": "/apps/frontend/dist/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/apps/frontend/dist/index.html"
+    }
+  ]
 }
 

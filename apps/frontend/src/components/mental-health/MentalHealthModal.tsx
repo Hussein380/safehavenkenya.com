@@ -203,7 +203,8 @@ export const MentalHealthModal = ({
         const totalScore = answers.reduce((a, b) => a + b, 0);
 
         try {
-            const response = await fetch("http://localhost:3000/api/mental-health/analyze", {
+            // Use relative path - same domain for frontend and backend on Vercel
+            const response = await fetch('/api/mental-health/analyze', {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
