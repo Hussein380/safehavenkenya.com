@@ -1,5 +1,6 @@
 {
   "version": 2,
+  "installCommand": "npm install",
   "builds": [
     {
       "src": "apps/backend/server.js",
@@ -13,7 +14,7 @@
       "use": "@vercel/static-build",
       "config": {
         "distDir": "dist",
-        "buildCommand": "npm run build"
+        "installCommand": "cd ../.. && npm install"
       }
     }
   ],
