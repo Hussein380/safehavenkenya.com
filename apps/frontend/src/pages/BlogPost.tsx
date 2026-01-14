@@ -132,7 +132,7 @@ const BlogPost = () => {
                         initial={{ opacity: 0, y: 30 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.3 }}
-                        className="max-w-3xl mx-auto prose prose-lg dark:prose-invert"
+                        className="max-w-3xl mx-auto prose prose-lg prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary hover:prose-a:text-primary/80 dark:prose-invert"
                     >
                         {post.body && <PortableText value={post.body} />}
                     </motion.div>
