@@ -66,52 +66,54 @@ const Blog = () => {
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="card-elevated h-full flex flex-col overflow-hidden p-0">
-                    <div className="relative overflow-hidden">
-                      {post.mainImage && (
-                        <img
-                          src={urlFor(post.mainImage).width(800).url()}
-                          alt={post.title}
-                          className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
-                      )}
-                      {post.categories && post.categories.length > 0 && (
-                        <span className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
-                          {post.categories[0].title}
-                        </span>
-                      )}
-                    </div>
-                    <div className="p-6 flex flex-col flex-1">
-                      <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
-                        <span className="flex items-center gap-1">
-                          <Calendar size={14} />
-                          {new Date(post.publishedAt).toLocaleDateString()}
-                        </span>
-                        {post.readTime && (
-                          <span className="flex items-center gap-1">
-                            <Clock size={14} />
-                            {post.readTime}
+                  <Link to={`/blog/${post.slug?.current}`} className="block h-full">
+                    <div className="card-elevated h-full flex flex-col overflow-hidden p-0">
+                      <div className="relative overflow-hidden">
+                        {post.mainImage && (
+                          <img
+                            src={urlFor(post.mainImage).width(800).url()}
+                            alt={post.title}
+                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        )}
+                        {post.categories && post.categories.length > 0 && (
+                          <span className="absolute top-4 left-4 px-3 py-1 bg-primary text-primary-foreground text-xs font-medium rounded-full">
+                            {post.categories[0].title}
                           </span>
                         )}
                       </div>
-                      <h2 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
-                        {post.title}
-                      </h2>
-                      <p className="text-muted-foreground text-sm leading-relaxed flex-1 line-clamp-3">
-                        {post.excerpt}
-                      </p>
-                      <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-                        <span className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <User size={14} />
-                          {post.author?.name || 'Safe Haven Team'}
-                        </span>
-                        <span className="text-primary font-medium text-sm group-hover:gap-2 inline-flex items-center transition-all">
-                          Read More
-                          <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
-                        </span>
+                      <div className="p-6 flex flex-col flex-1">
+                        <div className="flex items-center gap-4 text-sm text-muted-foreground mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar size={14} />
+                            {new Date(post.publishedAt).toLocaleDateString()}
+                          </span>
+                          {post.readTime && (
+                            <span className="flex items-center gap-1">
+                              <Clock size={14} />
+                              {post.readTime}
+                            </span>
+                          )}
+                        </div>
+                        <h2 className="font-display text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
+                          {post.title}
+                        </h2>
+                        <p className="text-muted-foreground text-sm leading-relaxed flex-1 line-clamp-3">
+                          {post.excerpt}
+                        </p>
+                        <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+                          <span className="flex items-center gap-2 text-sm text-muted-foreground">
+                            <User size={14} />
+                            {post.author?.name || 'Safe Haven Team'}
+                          </span>
+                          <span className="text-primary font-medium text-sm group-hover:gap-2 inline-flex items-center transition-all">
+                            Read More
+                            <ArrowRight size={14} className="ml-1 group-hover:translate-x-1 transition-transform" />
+                          </span>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </motion.article>
               ))}
             </div>
