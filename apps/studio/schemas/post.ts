@@ -78,6 +78,33 @@ export default defineType({
                     type: 'image',
                     options: { hotspot: true },
                 },
+                {
+                    name: 'video',
+                    title: 'Video',
+                    type: 'file',
+                    options: {
+                        accept: 'video/*,.gif'
+                    },
+                    fields: [
+                        {
+                            name: 'caption',
+                            title: 'Caption',
+                            type: 'string',
+                        },
+                        {
+                            name: 'autoplay',
+                            title: 'Autoplay (muted)',
+                            type: 'boolean',
+                            initialValue: true,
+                        },
+                        {
+                            name: 'loop',
+                            title: 'Loop',
+                            type: 'boolean',
+                            initialValue: true,
+                        },
+                    ],
+                },
             ],
         }),
     ],

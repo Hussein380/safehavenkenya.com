@@ -134,7 +134,47 @@ const BlogPost = () => {
                         transition={{ duration: 0.6, delay: 0.3 }}
                         className="max-w-3xl mx-auto prose prose-lg prose-headings:font-display prose-headings:text-foreground prose-p:text-muted-foreground prose-strong:text-foreground prose-a:text-primary hover:prose-a:text-primary/80 dark:prose-invert"
                     >
-                        {post.body && <PortableText value={post.body} />}
+                        {post.body && (
+                            <PortableText
+                                value={post.body}
+                                components={{
+                                    types: {
+                                        image: ({ value }) => (
+                                            <img
+                                                src={urlFor(value).width(800).url()}
+                                                alt={value.alt || ''}
+                                                className="rounded-lg my-6"
+                                            />
+                                        ),
+                                        video: ({ value }) => {
+                                            const fileUrl = value?.asset?._ref
+                                                ? `https://cdn.sanity.io/files/8n2w9qjw/production/${value.asset._ref.replace('file-', '').replace('-', '.')}`
+                                                : null;
+
+                                            if (!fileUrl) return null;
+
+                                            return (
+                                                <figure className="my-6">
+                                                    <video
+                                                        src={fileUrl}
+                                                        autoPlay={value.autoplay !== false}
+                                                        loop={value.loop !== false}
+                                                        muted
+                                                        playsInline
+                                                        className="rounded-lg w-full"
+                                                    />
+                                                    {value.caption && (
+                                                        <figcaption className="text-center text-sm text-muted-foreground mt-2">
+                                                            {value.caption}
+                                                        </figcaption>
+                                                    )}
+                                                </figure>
+                                            );
+                                        },
+                                    },
+                                }}
+                            />
+                        )}
                     </motion.div>
                 </div>
             </section>
