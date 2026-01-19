@@ -57,16 +57,86 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      // Web3Forms configuration - Get your access key from https://web3forms.com/
+      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "";
 
-    toast({
-      title: "Message Sent!",
-      description: "Thank you for reaching out. We'll get back to you soon.",
-    });
+      // Debug: Check if environment variable is loaded
+      console.log("Environment check:", {
+        hasAccessKey: !!accessKey,
+        accessKeyLength: accessKey.length,
+        accessKeyPrefix: accessKey.substring(0, 8) + "...",
+      });
 
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
-    setIsSubmitting(false);
+      if (!accessKey) {
+        toast({
+          title: "Configuration Required",
+          description: "Web3Forms access key not found. Please check your .env file and restart the dev server.",
+          variant: "destructive",
+        });
+        setIsSubmitting(false);
+        return;
+      }
+
+      // Prepare the request body according to Web3Forms API
+      const requestBody = {
+        access_key: accessKey,
+        subject: `New Contact Form Message: ${formData.subject}`,
+        from_name: formData.name,
+        email: formData.email,
+        message: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || "Not provided"}\n\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`,
+      };
+
+      console.log("Sending request to Web3Forms...", {
+        url: "https://api.web3forms.com/submit",
+        hasAccessKey: !!requestBody.access_key,
+      });
+
+      // Send via Web3Forms API
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      console.log("Response status:", response.status, response.statusText);
+
+      const data = await response.json();
+      console.log("Response data:", data);
+
+      if (!response.ok) {
+        throw new Error(data.message || `HTTP error! status: ${response.status}`);
+      }
+
+      if (!data.success) {
+        throw new Error(data.message || "Failed to send message. Please try again.");
+      }
+
+      toast({
+        title: "Message Sent!",
+        description: "Thank you for reaching out. We'll get back to you soon.",
+      });
+
+      // Reset form
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
+    } catch (error: any) {
+      console.error("Error sending message:", error);
+      console.error("Error details:", {
+        message: error.message,
+        stack: error.stack,
+      });
+      
+      toast({
+        title: "Error Sending Message",
+        description: error.message || "Failed to send message. Please try again or contact us directly via email.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
