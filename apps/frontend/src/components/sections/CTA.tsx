@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, MessageCircle, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { SITE_CONFIG } from "@/config";
 
 export const CTA = () => {
   return (
@@ -37,7 +38,7 @@ export const CTA = () => {
               </Link>
             </Button>
             <Button asChild variant="whatsapp" size="xl">
-              <a href="https://wa.me/254721414295" target="_blank" rel="noopener noreferrer">
+              <a href={SITE_CONFIG.whatsappLink} target="_blank" rel="noopener noreferrer">
                 <MessageCircle className="mr-2" size={20} />
                 WhatsApp Us
               </a>

@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
 import logo from "@/assets/logo.png";
+import { SITE_CONFIG } from "@/config";
 
 const footerLinks = {
   company: [
@@ -115,25 +116,25 @@ export const Footer = () => {
               <li className="flex items-start gap-3">
                 <Mail size={18} className="text-accent mt-0.5 flex-shrink-0" />
                 <a
-                  href="mailto:consultancysafehaven@gmail.com"
+                  href={`mailto:${SITE_CONFIG.contactEmail}`}
                   className="text-primary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
                 >
-                  consultancysafehaven@gmail.com
+                  {SITE_CONFIG.contactEmail}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <Phone size={18} className="text-accent mt-0.5 flex-shrink-0" />
                 <a
-                  href="tel:0729875368"
+                  href={SITE_CONFIG.primaryPhoneLink}
                   className="text-primary-foreground/70 hover:text-accent transition-colors duration-300 text-sm"
                 >
-                  0729 875 368
+                  {SITE_CONFIG.primaryPhone}
                 </a>
               </li>
               <li className="flex items-start gap-3">
                 <MapPin size={18} className="text-accent mt-0.5 flex-shrink-0" />
                 <span className="text-primary-foreground/70 text-sm">
-                  Nairobi, Kenya
+                  {SITE_CONFIG.location}
                 </span>
               </li>
             </ul>

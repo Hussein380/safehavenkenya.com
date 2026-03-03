@@ -6,28 +6,30 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Mail, Phone, MapPin, MessageCircle, Send, Clock } from "lucide-react";
+import { SITE_CONFIG } from "@/config";
+import { sendContactMessage, type ContactFormData } from "@/lib/contact";
 
 const contactInfo = [
   {
     icon: Mail,
     title: "Email Us",
-    details: "consultancysafehaven@gmail.com",
+    details: SITE_CONFIG.contactEmail,
     description: "We'll respond within 24 hours",
-    href: "mailto:consultancysafehaven@gmail.com",
+    href: `mailto:${SITE_CONFIG.contactEmail}`,
   },
   {
     icon: Phone,
     title: "Call Us",
-    details: "0729 875 368",
+    details: SITE_CONFIG.primaryPhone,
     description: "Mon-Fri, 9am-5pm",
-    href: "tel:0729875368",
+    href: SITE_CONFIG.primaryPhoneLink,
   },
   {
     icon: MessageCircle,
     title: "WhatsApp",
-    details: "0721 414295",
+    details: SITE_CONFIG.whatsappPhone,
     description: "Quick responses guaranteed",
-    href: "https://wa.me/254721414295",
+    href: SITE_CONFIG.whatsappLink,
   },
   {
     icon: MapPin,
@@ -41,7 +43,7 @@ const contactInfo = [
 const Contact = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<ContactFormData>({
     name: "",
     email: "",
     phone: "",
@@ -58,62 +60,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Web3Forms configuration - Get your access key from https://web3forms.com/
-      const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "";
-
-      // Debug: Check if environment variable is loaded
-      console.log("Environment check:", {
-        hasAccessKey: !!accessKey,
-        accessKeyLength: accessKey.length,
-        accessKeyPrefix: accessKey.substring(0, 8) + "...",
-      });
-
-      if (!accessKey) {
-        toast({
-          title: "Configuration Required",
-          description: "Web3Forms access key not found. Please check your .env file and restart the dev server.",
-          variant: "destructive",
-        });
-        setIsSubmitting(false);
-        return;
-      }
-
-      // Prepare the request body according to Web3Forms API
-      const requestBody = {
-        access_key: accessKey,
-        subject: `New Contact Form Message: ${formData.subject}`,
-        from_name: formData.name,
-        email: formData.email,
-        message: `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone || "Not provided"}\n\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`,
-      };
-
-      console.log("Sending request to Web3Forms...", {
-        url: "https://api.web3forms.com/submit",
-        hasAccessKey: !!requestBody.access_key,
-      });
-
-      // Send via Web3Forms API
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(requestBody),
-      });
-
-      console.log("Response status:", response.status, response.statusText);
-
-      const data = await response.json();
-      console.log("Response data:", data);
-
-      if (!response.ok) {
-        throw new Error(data.message || `HTTP error! status: ${response.status}`);
-      }
-
-      if (!data.success) {
-        throw new Error(data.message || "Failed to send message. Please try again.");
-      }
+      await sendContactMessage(formData);
 
       toast({
         title: "Message Sent!",
@@ -123,12 +70,6 @@ const Contact = () => {
       // Reset form
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (error: any) {
-      console.error("Error sending message:", error);
-      console.error("Error details:", {
-        message: error.message,
-        stack: error.stack,
-      });
-      
       toast({
         title: "Error Sending Message",
         description: error.message || "Failed to send message. Please try again or contact us directly via email.",
@@ -337,7 +278,7 @@ const Contact = () => {
                   <p className="text-center text-muted-foreground text-sm">
                     Or reach us instantly via{" "}
                     <a
-                      href="https://wa.me/254721414295"
+                      href={SITE_CONFIG.whatsappLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary font-medium hover:underline"
